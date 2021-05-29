@@ -1,0 +1,8 @@
+name: ModularSpells
+version: ${project.version}
+main: com.alexiwolf.prototype.modularspells.ModularSpells
+api-version: 1.16
+prefix: Modular Spells
+authors: [AlexiWolf]
+description: ${project.description}
+website: ${project.url}
