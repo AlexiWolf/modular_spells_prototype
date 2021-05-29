@@ -36,7 +36,10 @@ public class Messages {
             "Modular Spells is a magic plugin for Minecraft Paper servers adding a component-based magic system.";
 
     public static final String PLUGIN_PROTOTYPE_DESCRIPTION =
-            ".";
+            "This version of Modular Spells is a prototype.  It is not suitable for production use, and was created " +
+            "primarily as a proof-of-concept and a demo.  It includes only the base spell system, and a few " +
+            "pre-configured spells to play with.";
+
 
     public static final String SOURCE_CODE_LINK = "<https://github.com/AlexiWolf/modular_spells_prototype>";
 
