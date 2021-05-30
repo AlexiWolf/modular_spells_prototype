@@ -47,4 +47,9 @@ public class CyclingSpellProvider implements SpellProvider {
         }
         spellIndexMap.put(casterUuid, spellIndex);
     }
+
+    @Override
+    public List<Spell> getSpells() {
+        return spellList;
+    }
 }
