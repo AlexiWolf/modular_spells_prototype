@@ -224,12 +224,22 @@ public class Spell implements RateLimited, ManaConsumer, ToItem {
 
     public List<String> generateLore() {
         List<String> lore = new ArrayList<>();
+        addOverviewLore(lore);
         addProjectileLore(lore);
         addImpactLore(lore);
         addImpactAreaLore(lore);
         addCasterLore(lore);
         addCasterAreaLore(lore);
         return lore;
+    }
+
+    protected void addOverviewLore(List<String> lore) {
+        lore.add(
+                ChatColor.WHITE + "Mana Cost: " + ChatColor.LIGHT_PURPLE + getManaCost() + ChatColor.RESET
+        );
+        lore.add(
+                ChatColor.WHITE + "Cool-down: " + ChatColor.GREEN + ((double) (getCoolDown()) / 1000) + " seconds" + ChatColor.RESET
+        );
     }
 
     protected void addProjectileLore(List<String> lore) {
