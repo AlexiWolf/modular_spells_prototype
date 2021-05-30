@@ -3,7 +3,6 @@ package com.alexiwolf.prototype.modularspells.core.spellbook;
 import com.alexiwolf.prototype.modularspells.ModularSpells;
 import com.alexiwolf.prototype.modularspells.core.providers.SpellProvider;
 import com.alexiwolf.prototype.modularspells.core.spells.Spell;
-import net.md_5.bungee.api.chat.ClickEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
