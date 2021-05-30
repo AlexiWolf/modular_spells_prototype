@@ -23,6 +23,7 @@ import com.alexiwolf.prototype.modularspells.core.spells.Spell;
 import com.alexiwolf.prototype.modularspells.core.spells.effects.Effect;
 import com.alexiwolf.prototype.modularspells.core.spells.effects.EffectType;
 import com.alexiwolf.prototype.modularspells.core.spells.effects.ambient.AmbientEffect;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 
@@ -48,5 +49,10 @@ public class DamageEffect extends Effect {
             LivingEntity entity = (LivingEntity) target;
             entity.damage(damage, caster);
         }
+    }
+
+    @Override
+    public String getLore() {
+        return ChatColor.WHITE + "Damage: " + ChatColor.RED + damage + ChatColor.RESET;
     }
 }

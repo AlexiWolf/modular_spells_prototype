@@ -4,6 +4,7 @@ import com.alexiwolf.prototype.modularspells.core.spells.Spell;
 import com.alexiwolf.prototype.modularspells.core.spells.effects.Effect;
 import com.alexiwolf.prototype.modularspells.core.spells.effects.EffectType;
 import com.alexiwolf.prototype.modularspells.core.spells.effects.ambient.AmbientEffect;
+import org.bukkit.ChatColor;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -36,5 +37,10 @@ public class HealingEffect extends Effect {
         } else {
             return value;
         }
+    }
+
+    @Override
+    public String getLore() {
+        return ChatColor.WHITE + "Heals: " + ChatColor.GREEN + healAmount + ChatColor.RESET;
     }
 }

@@ -23,6 +23,7 @@ import com.alexiwolf.prototype.modularspells.core.spells.effects.ambient.NullAmb
 import com.alexiwolf.prototype.modularspells.core.spells.Spell;
 import com.alexiwolf.prototype.modularspells.core.spells.effects.Effect;
 import com.alexiwolf.prototype.modularspells.core.spells.effects.EffectType;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
@@ -45,5 +46,10 @@ public class ExplosionEffect extends Effect {
     public void applyToLocation(Location location, Spell spell, Entity _caster) {
         World world = location.getWorld();
         world.createExplosion(location, power, false, false);
+    }
+
+    @Override
+    public String getLore() {
+        return ChatColor.WHITE + "Summons Explosion" + ChatColor.RESET;
     }
 }
