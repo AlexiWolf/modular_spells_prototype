@@ -21,6 +21,7 @@ package com.alexiwolf.prototype.modularspells;
 
 import com.alexiwolf.prototype.modularspells.core.providers.CyclingSpellProvider;
 import com.alexiwolf.prototype.modularspells.core.providers.SpellProvider;
+import com.alexiwolf.prototype.modularspells.core.spellbook.SpellBookUseListener;
 import com.alexiwolf.prototype.modularspells.core.spells.listeners.DefaultSpellEventListener;
 import com.alexiwolf.prototype.modularspells.core.spells.listeners.PerSpellCoolDownListener;
 import com.alexiwolf.prototype.modularspells.commands.AboutCommand;
@@ -76,6 +77,7 @@ public final class ModularSpells extends JavaPlugin {
         pluginManager.registerEvents(new SpellCastListener(this, getSpellProvider()), this);
         pluginManager.registerEvents(new DefaultSpellEventListener(), this);
         pluginManager.registerEvents(new PerSpellCoolDownListener(), this);
+        pluginManager.registerEvents(new SpellBookUseListener(this, getSpellProvider()), this);
         // pluginManager.registerEvents(new SpellExpCostListener(), this);
     }
 
