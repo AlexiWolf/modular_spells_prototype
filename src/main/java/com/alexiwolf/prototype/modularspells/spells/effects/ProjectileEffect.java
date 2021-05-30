@@ -23,6 +23,7 @@ import com.alexiwolf.prototype.modularspells.core.spells.Spell;
 import com.alexiwolf.prototype.modularspells.core.spells.effects.Effect;
 import com.alexiwolf.prototype.modularspells.core.spells.effects.EffectType;
 import com.alexiwolf.prototype.modularspells.core.spells.effects.ambient.AmbientEffect;
+import com.alexiwolf.prototype.modularspells.core.spells.effects.ambient.NullAmbientEffect;
 import com.alexiwolf.prototype.modularspells.core.spells.projectiles.ProjectileUpdateTask;
 import com.alexiwolf.prototype.modularspells.core.spells.projectiles.SpellProjectile;
 import org.bukkit.Location;
@@ -38,6 +39,7 @@ public class ProjectileEffect extends Effect {
     private ProjectileUpdateTask projectileSystem;
     private double launchVelocity;
     private double gravity;
+    private AmbientEffect launchAmbientEffect;
 
     /**
      * Default constructor requiring a reference to the plugin's ProjectileSystem, and a launch velocity.
@@ -55,6 +57,7 @@ public class ProjectileEffect extends Effect {
         this.projectileSystem = projectileSystem;
         this.launchVelocity = launchVelocity;
         this.gravity = 0.05;
+        this.launchAmbientEffect = new NullAmbientEffect();
     }
 
     /**
@@ -69,12 +72,14 @@ public class ProjectileEffect extends Effect {
             long coolDown,
             int manaCost,
             double gravity,
+            AmbientEffect launchAmbientEffect,
             AmbientEffect ambientEffect
     ) {
         super(EffectType.PROJECTILE, ambientEffect, coolDown, manaCost);
         this.projectileSystem = projectileSystem;
         this.launchVelocity = launchVelocity;
         this.gravity = gravity;
+        this.launchAmbientEffect = new NullAmbientEffect();
     }
 
     @Override

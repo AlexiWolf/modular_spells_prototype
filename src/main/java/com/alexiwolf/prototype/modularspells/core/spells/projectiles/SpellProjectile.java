@@ -23,11 +23,10 @@ package com.alexiwolf.prototype.modularspells.core.spells.projectiles;
 import com.alexiwolf.prototype.modularspells.core.spells.Spell;
 import com.alexiwolf.prototype.modularspells.core.spells.effects.ambient.AmbientEffect;
 import com.alexiwolf.prototype.modularspells.core.spells.events.SpellImpactEvent;
-import org.bukkit.Bukkit;
-import org.bukkit.FluidCollisionMode;
-import org.bukkit.Location;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
@@ -69,6 +68,10 @@ public class SpellProjectile {
             ambientEffect.play(location);
         } else if (!hasImpacted) {
             if (impact.getHitEntity() != caster) {
+                if (impact.getHitEntity() instanceof Player && caster instanceof Player) {
+                    Player player = (Player) caster;
+                    player.playSound(player.getEyeLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 1, 1);
+                }
                 World world = location.getWorld();
                 Vector hitPosition = impact.getHitPosition();
                 Location impactLocation = new Location(world, hitPosition.getX(), hitPosition.getY(), hitPosition.getZ());
@@ -88,7 +91,7 @@ public class SpellProjectile {
 
     private RayTraceResult rayTraceImpact() {
         World world = location.getWorld();
-        return world.rayTrace(location, velocity.clone().normalize(), 2, FluidCollisionMode.ALWAYS, true, 0.1, null);
+        return world.rayTrace(location, velocity.clone().normalize(), 2.5, FluidCollisionMode.ALWAYS, true, 0.2, null);
     }
 
     public Entity getCaster() {

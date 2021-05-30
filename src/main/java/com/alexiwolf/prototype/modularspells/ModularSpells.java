@@ -76,14 +76,16 @@ public final class ModularSpells extends JavaPlugin {
         pluginManager.registerEvents(new SpellCastListener(this, getSpellProvider()), this);
         pluginManager.registerEvents(new DefaultSpellEventListener(), this);
         pluginManager.registerEvents(new PerSpellCoolDownListener(), this);
-        pluginManager.registerEvents(new SpellExpCostListener(), this);
+        // pluginManager.registerEvents(new SpellExpCostListener(), this);
     }
 
     private List<Spell> getSpells() {
         List<Spell> spells = new ArrayList<>();
-        spells.add(DefaultSpells.simpleAttack(projectileSystem));
+        spells.add(DefaultSpells.simpleAttack(projectileSystem, this));
+        spells.add(DefaultSpells.magicBolt(projectileSystem));
         spells.add(DefaultSpells.largeFireball(projectileSystem));
         spells.add(DefaultSpells.healSelf());
+        spells.add(DefaultSpells.healingProjectile(projectileSystem));
         return spells;
     }
 

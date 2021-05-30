@@ -8,5 +8,6 @@ import org.bukkit.entity.Entity;
  */
 public interface SpellProvider {
     Spell getActiveSpell(Entity caster);
-    void setActiveSpell(Entity caster, Spell spell);
+    void selectNextSpell(Entity caster);
+    void selectPreviousSpell(Entity caster);
 }

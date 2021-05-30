@@ -23,13 +23,8 @@ public class CyclingSpellProvider implements SpellProvider {
         return spellList.get(spellIndex);
     }
 
-    /**
-     * Cycle to caster to the next spell.
-     * @param caster The caster to cycle.
-     * @param spell  Ignores this.
-     */
     @Override
-    public void setActiveSpell(Entity caster, Spell spell) {
+    public void selectNextSpell(Entity caster) {
         UUID casterUuid = caster.getUniqueId();
         if (!spellIndexMap.containsKey(casterUuid))
             spellIndexMap.put(casterUuid, 0);
@@ -37,6 +32,19 @@ public class CyclingSpellProvider implements SpellProvider {
         spellIndex++;
         if (spellIndex > spellList.size() - 1)
             spellIndex = 0;
+        spellIndexMap.put(casterUuid, spellIndex);
+    }
+
+    @Override
+    public void selectPreviousSpell(Entity caster) {
+        UUID casterUuid = caster.getUniqueId();
+        if (!spellIndexMap.containsKey(casterUuid))
+            spellIndexMap.put(casterUuid, 0);
+        int spellIndex = spellIndexMap.getOrDefault(casterUuid, 0);
+        spellIndex--;
+        if (spellIndex == -1) {
+            spellIndex = spellList.size() - 1;
+        }
         spellIndexMap.put(casterUuid, spellIndex);
     }
 }

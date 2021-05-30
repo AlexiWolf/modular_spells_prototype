@@ -3,6 +3,7 @@ package com.alexiwolf.prototype.modularspells.commands;
 import com.alexiwolf.prototype.modularspells.ModularSpells;
 import com.alexiwolf.prototype.modularspells.core.Items;
 import com.alexiwolf.prototype.modularspells.core.utils.command.PluginCommand;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -20,13 +21,27 @@ public class WandCommand extends PluginCommand {
 
     @Override
     public boolean doCommand(CommandSender sender, String commandLabel, String[] args) {
-        if (sender instanceof Player) {
-            Player player = (Player) sender;
-            player.sendMessage(message);
-            player.getInventory().addItem(Items.wand(plugin));
+        if (args.length > 0) {
+            for (String name: args) {
+                Player player = Bukkit.getPlayer(name);
+                if (player != null) {
+                    giveWand(player);
+                }
+            }
         } else {
-            sender.sendMessage("This command can only be used by players.");
+            if (sender instanceof Player) {
+                Player player = (Player) sender;
+                giveWand(player);
+            } else {
+                sender.sendMessage("This command can only be used by players.");
+            }
         }
         return true;
     }
+
+    private void giveWand(Player player) {
+        player.sendMessage(message);
+        player.getInventory().addItem(Items.wand(plugin));
+    }
+
 }
