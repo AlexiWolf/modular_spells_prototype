@@ -52,6 +52,9 @@ public class SpellBookUseListener implements Listener {
                 ChatColor.DARK_PURPLE + "~ Spell Book" + ChatColor.RESET + " - " +
                         ChatColor.DARK_GREEN + "Select a Spell" + ChatColor.DARK_PURPLE + " ~"
         );
+        for (Spell spell: spellProvider.getSpells()) {
+            gui.addItem(spell.toItem());
+        }
         return gui;
     }
 }
