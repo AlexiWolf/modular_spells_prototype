@@ -49,6 +49,19 @@ public class CyclingSpellProvider implements SpellProvider {
     }
 
     @Override
+    public void selectSpell(Entity caster, Spell spell) {
+        UUID casterUuid = caster.getUniqueId();
+        if (!spellIndexMap.containsKey(casterUuid)) {
+            spellIndexMap.put(casterUuid, 0);
+        }
+        int spellIndex = spellList.indexOf(spell);
+        if (spellIndex == -1) {
+            spellIndex = 0;
+        }
+        spellIndexMap.put(casterUuid, spellIndex);
+    }
+
+    @Override
     public List<Spell> getSpells() {
         return spellList;
     }
