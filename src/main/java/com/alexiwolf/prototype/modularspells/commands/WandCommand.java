@@ -42,6 +42,7 @@ public class WandCommand extends PluginCommand {
     private void giveWand(Player player) {
         player.sendMessage(message);
         player.getInventory().addItem(Items.wand(plugin));
+        player.getInventory().addItem(Items.spellBook(plugin));
     }
 
 }
