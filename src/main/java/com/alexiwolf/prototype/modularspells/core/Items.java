@@ -24,4 +24,16 @@ public class Items {
         wand.setItemMeta(meta);
         return wand;
     }
+
+    public static ItemStack spellBook(ModularSpells plugin) {
+        ItemStack spellBook = new ItemStack(Material.ENCHANTED_BOOK);
+        ItemMeta meta = spellBook.getItemMeta();
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        meta.setDisplayName("Spell Book");
+        meta.setLore((Arrays.asList("Allows you to select what spell you'll cast.")));
+        meta.getPersistentDataContainer()
+                .set(new NamespacedKey(plugin, "isSpellBook"), PersistentDataType.BYTE, (byte) 1);
+        spellBook.setItemMeta(meta);
+        return spellBook;
+    }
 }
