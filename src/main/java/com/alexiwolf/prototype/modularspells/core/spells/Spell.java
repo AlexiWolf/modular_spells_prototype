@@ -215,6 +215,7 @@ public class Spell implements RateLimited, ManaConsumer, ToItem {
         ItemStack item = new ItemStack(Material.PAPER);
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.setDisplayName(getName());
+        itemMeta.setLore(generateLore());
         itemMeta.addEnchant(Enchantment.CHANNELING, 1, false);
         itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         item.setItemMeta(itemMeta);
@@ -225,7 +226,7 @@ public class Spell implements RateLimited, ManaConsumer, ToItem {
         List<String> lore = new ArrayList<>();
         addProjectileLore(lore);
         addImpactLore(lore);
-        addImpactLore(lore);
+        addImpactAreaLore(lore);
         addCasterLore(lore);
         addCasterAreaLore(lore);
         return lore;
