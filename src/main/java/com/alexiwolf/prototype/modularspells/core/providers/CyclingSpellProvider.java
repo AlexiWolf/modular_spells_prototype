@@ -22,7 +22,6 @@ public class CyclingSpellProvider implements SpellProvider {
         UUID casterUuid = caster.getUniqueId();
         int spellIndex = spellIndexMap.getOrDefault(casterUuid, 0);
         spellIndexMap.put(casterUuid, spellIndex);
-        Bukkit.getLogger().info(casterUuid + " " + spellIndex);
         return spellList.get(spellIndex);
     }
 
