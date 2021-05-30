@@ -26,7 +26,13 @@ import com.alexiwolf.prototype.modularspells.core.spells.events.SpellImpactEvent
 import com.alexiwolf.prototype.modularspells.core.spells.events.SpellPrecastEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Item;
+import org.bukkit.inventory.ItemFlag;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.PluginManager;
 
 import java.util.*;
@@ -35,7 +41,7 @@ import java.util.stream.Collectors;
 /**
  * Represents a set of effects to be cast.
  */
-public class Spell implements RateLimited, ManaConsumer {
+public class Spell implements RateLimited, ManaConsumer, ToItem {
     final Set<Effect> effects = new HashSet<>();
 
     String name;
@@ -201,5 +207,16 @@ public class Spell implements RateLimited, ManaConsumer {
         return effects.stream()
                 .mapToInt(Effect::getManaCost)
                 .sum();
+    }
+
+    @Override
+    public ItemStack toItem() {
+        ItemStack item = new ItemStack(Material.PAPER);
+        ItemMeta itemMeta = item.getItemMeta();
+        itemMeta.setDisplayName(getName());
+        itemMeta.addEnchant(Enchantment.CHANNELING, 1, false);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        item.setItemMeta(itemMeta);
+        return item;
     }
 }
