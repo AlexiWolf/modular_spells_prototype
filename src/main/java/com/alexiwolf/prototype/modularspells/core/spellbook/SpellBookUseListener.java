@@ -72,7 +72,6 @@ public class SpellBookUseListener implements Listener {
         if (isSpellBookGui(event.getClickedInventory())) {
             ItemStack item = event.getCurrentItem();
             if (item != null) {
-                plugin.getLogger().info("Item: " + item);
                 ItemMeta itemMeta = item.getItemMeta();
                 String name = itemMeta.getDisplayName();
                 Spell selectedSpell = spellProvider.getSpells()
