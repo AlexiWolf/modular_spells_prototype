@@ -50,6 +50,7 @@ public final class ModularSpells extends JavaPlugin {
     private final Logger logger = getLogger();
     private final CommandMapper commandMapper = new PluginCommandMapper(this);
     private final ProjectileUpdateTask projectileSystem = new ProjectileUpdateTask();
+    private final SpellProvider spellProvider = newSpellProvider();
 
     @Override
     public void onEnable() {
@@ -74,10 +75,10 @@ public final class ModularSpells extends JavaPlugin {
 
     private void registerEventListeners() {
         PluginManager pluginManager = Bukkit.getPluginManager();
-        pluginManager.registerEvents(new SpellCastListener(this, getSpellProvider()), this);
+        pluginManager.registerEvents(new SpellCastListener(this, spellProvider), this);
         pluginManager.registerEvents(new DefaultSpellEventListener(), this);
         pluginManager.registerEvents(new PerSpellCoolDownListener(), this);
-        pluginManager.registerEvents(new SpellBookUseListener(this, getSpellProvider()), this);
+        pluginManager.registerEvents(new SpellBookUseListener(this, spellProvider), this);
         // pluginManager.registerEvents(new SpellExpCostListener(), this);
     }
 
@@ -99,7 +100,7 @@ public final class ModularSpells extends JavaPlugin {
         Bukkit.addRecipe(recipe);
     }
 
-    private SpellProvider getSpellProvider() {
+    private SpellProvider newSpellProvider() {
         return new CyclingSpellProvider(getSpells());
     }
 }

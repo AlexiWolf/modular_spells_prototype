@@ -12,6 +12,6 @@ public interface SpellProvider {
     Spell getActiveSpell(Entity caster);
     void selectNextSpell(Entity caster);
     void selectPreviousSpell(Entity caster);
-    void selectSpell(Entity caster, Spell spell);
+    void selectSpell(Entity caster, int index);
     List<Spell> getSpells();
 }

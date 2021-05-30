@@ -70,15 +70,19 @@ public class SpellBookUseListener implements Listener {
     @EventHandler
     public void onGuiClick(InventoryClickEvent event) {
         if (isSpellBookGui(event.getClickedInventory())) {
-            ItemStack item = event.getCursor();
-            ItemMeta itemMeta = item.getItemMeta();
-            String name = itemMeta.getDisplayName();
-            Spell selectedSpell = spellProvider.getSpells()
-                    .stream()
-                    .filter(spell -> spell.getName().equals(name))
-                    .findFirst()
-                    .get();
-
+            ItemStack item = event.getCurrentItem();
+            if (item != null) {
+                plugin.getLogger().info("Item: " + item);
+                ItemMeta itemMeta = item.getItemMeta();
+                String name = itemMeta.getDisplayName();
+                Spell selectedSpell = spellProvider.getSpells()
+                        .stream()
+                        .filter(spell -> spell.getName().equals(name))
+                        .findFirst()
+                        .get();
+                spellProvider.selectSpell(event.getWhoClicked(), spellProvider.getSpells().indexOf(selectedSpell));
+                event.getWhoClicked().closeInventory();
+            }
             event.setCancelled(true);
         }
     }

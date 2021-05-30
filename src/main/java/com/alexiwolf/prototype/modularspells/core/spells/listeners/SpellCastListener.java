@@ -66,16 +66,7 @@ public class SpellCastListener implements Listener {
      */
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
-        if (event.getPlayer().isSneaking() && isWandItem(event.getItem())) {
-            if (isPunchAction(event.getAction())) {
-                spellProvider.selectNextSpell(event.getPlayer());
-            } else {
-                spellProvider.selectPreviousSpell(event.getPlayer());
-            }
-            event.getPlayer().sendMessage(
-                    ChatColor.GREEN + "Active Spell: " + ChatColor.LIGHT_PURPLE
-                            + spellProvider.getActiveSpell(event.getPlayer()).getName());
-        } else if (isPunchAction(event.getAction()) && isWandItem(event.getItem())) {
+        if (isPunchAction(event.getAction()) && isWandItem(event.getItem())) {
             Spell spell = spellProvider.getActiveSpell(event.getPlayer());
             spell.trigger(event.getPlayer());
             event.setCancelled(true);
