@@ -26,6 +26,7 @@ import com.alexiwolf.prototype.modularspells.core.spells.effects.ambient.Ambient
 import com.alexiwolf.prototype.modularspells.core.spells.effects.ambient.NullAmbientEffect;
 import com.alexiwolf.prototype.modularspells.core.spells.projectiles.ProjectileUpdateTask;
 import com.alexiwolf.prototype.modularspells.core.spells.projectiles.SpellProjectile;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -40,6 +41,7 @@ public class ProjectileEffect extends Effect {
     private double launchVelocity;
     private double gravity;
     private AmbientEffect launchAmbientEffect;
+    private String lore;
 
     /**
      * Default constructor requiring a reference to the plugin's ProjectileSystem, and a launch velocity.
@@ -51,13 +53,15 @@ public class ProjectileEffect extends Effect {
             double launchVelocity,
             long coolDown,
             int manaCost,
-            AmbientEffect ambientEffect
+            AmbientEffect ambientEffect,
+            String lore
     ) {
         super(EffectType.PROJECTILE, ambientEffect, coolDown, manaCost);
         this.projectileSystem = projectileSystem;
         this.launchVelocity = launchVelocity;
         this.gravity = 0.05;
         this.launchAmbientEffect = new NullAmbientEffect();
+        this.lore = lore;
     }
 
     /**
@@ -73,13 +77,15 @@ public class ProjectileEffect extends Effect {
             int manaCost,
             double gravity,
             AmbientEffect launchAmbientEffect,
-            AmbientEffect ambientEffect
+            AmbientEffect ambientEffect,
+            String lore
     ) {
         super(EffectType.PROJECTILE, ambientEffect, coolDown, manaCost);
         this.projectileSystem = projectileSystem;
         this.launchVelocity = launchVelocity;
         this.gravity = gravity;
         this.launchAmbientEffect = new NullAmbientEffect();
+        this.lore = lore;
     }
 
     @Override
@@ -97,4 +103,9 @@ public class ProjectileEffect extends Effect {
 
     @Override
     public void applyToLocation(Location location, Spell spell, Entity caster) {/* Effect requires an entity. */}
+
+    @Override
+    public String getLore() {
+        return ChatColor.WHITE + lore + ChatColor.RESET;
+    }
 }

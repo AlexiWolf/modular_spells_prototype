@@ -19,11 +19,18 @@ public class DefaultSpells {
     public static Spell simpleAttack(ProjectileUpdateTask projectileSystem, JavaPlugin plugin) {
         Spell spell = new Spell();
         spell.setName("Quick Attack");
-        spell.addEffect(new ProjectileEffect(projectileSystem, 2, 0, 0,
-            location -> {
-                World world = location.getWorld();
-                world.spawnParticle(Particle.SPELL, location, 6, 0.0, 0.0, 0.0, 0, null, true);
-            })
+        spell.addEffect(
+                new ProjectileEffect(
+                        projectileSystem,
+                        2,
+                        0,
+                        0,
+                        location -> {
+                            World world = location.getWorld();
+                            world.spawnParticle(Particle.SPELL, location, 6, 0.0, 0.0, 0.0, 0, null, true);
+                            },
+                        "A fast, wispy bolt of magic"
+                )
         );
         spell.addEffect(new DamageEffect(
                 EffectType.IMPACT,
@@ -48,7 +55,8 @@ public class DefaultSpells {
                         location -> {
                             World world = location.getWorld();
                             world.spawnParticle(Particle.SPELL_WITCH, location, 1, 0, 0, 0, 0, null, true);
-                        }
+                        },
+                        "A gravity-defying bolt of magic."
                 )
         );
         spell.addEffect(
@@ -70,7 +78,7 @@ public class DefaultSpells {
     public static Spell largeFireball(ProjectileUpdateTask projectileSystem) {
         Spell spell = new Spell();
         spell.setName("Big Fireball");
-        spell.addEffect(new ProjectileEffect(projectileSystem, 1.3,  0, 0, new FireBallAmbientEffect()));
+        spell.addEffect(new ProjectileEffect(projectileSystem, 1.3,  0, 0, new FireBallAmbientEffect(), "A slow-moving fireball."));
         spell.addEffect(new DamageEffect(EffectType.IMPACT, new NullAmbientEffect(), 20,  0, 2));
         spell.addEffect(new ExplosionEffect(EffectType.IMPACT, 3,  10_000, 2));
         return spell;
@@ -105,7 +113,8 @@ public class DefaultSpells {
                     World world = location.getWorld();
                     world.spawnParticle(Particle.HEART, location, 1, 0.1, 0.1, 0.1, 0.1, null, true);
                     world.spawnParticle(Particle.VILLAGER_HAPPY, location, 1, 0.1, 0.1, 0.1, 0.1, null, true);
-                }
+                },
+                "A sparkling beam of love."
         ));
         spell.addEffect(new HealingEffect(EffectType.IMPACT,
                 location -> {
