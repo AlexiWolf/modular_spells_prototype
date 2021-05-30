@@ -46,7 +46,12 @@ public class SpellBookUseListener implements Listener {
     }
 
     private Inventory getGui(Player player) {
-        Inventory gui = Bukkit.createInventory(player, 18, ChatColor.LIGHT_PURPLE + "Select a Spell");
+        Inventory gui = Bukkit.createInventory(
+                player,
+                18,
+                ChatColor.DARK_PURPLE + "~ Spell Book" + ChatColor.RESET + " - " +
+                        ChatColor.DARK_GREEN + "Select a Spell" + ChatColor.DARK_PURPLE + " ~"
+        );
         return gui;
     }
 }
