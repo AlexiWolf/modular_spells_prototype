@@ -25,6 +25,7 @@ import com.alexiwolf.prototype.modularspells.core.spells.effects.EffectType;
 import com.alexiwolf.prototype.modularspells.core.spells.events.SpellImpactEvent;
 import com.alexiwolf.prototype.modularspells.core.spells.events.SpellPrecastEvent;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -218,5 +219,72 @@ public class Spell implements RateLimited, ManaConsumer, ToItem {
         itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         item.setItemMeta(itemMeta);
         return item;
+    }
+
+    public List<String> generateLore() {
+        List<String> lore = new ArrayList<>();
+        addProjectileLore(lore);
+        addImpactLore(lore);
+        addImpactLore(lore);
+        addCasterLore(lore);
+        addCasterAreaLore(lore);
+        return lore;
+    }
+
+    protected void addProjectileLore(List<String> lore) {
+        List<Effect> effects = filterEffects(EffectType.PROJECTILE);
+        if (hasEffects(effects)) {
+            lore.add(ChatColor.BOLD + "Projectiles" + ChatColor.RESET);
+            addEffectLore(effects, lore);
+        }
+    }
+
+    protected void addImpactLore(List<String> lore) {
+        List<Effect> effects = filterEffects(EffectType.IMPACT);
+        if (hasEffects(effects)) {
+            lore.add(ChatColor.BOLD + "On Impact" + ChatColor.RESET);
+            addEffectLore(effects, lore);
+        }
+    }
+
+    protected void addImpactAreaLore(List<String> lore) {
+        List<Effect> effects = filterEffects(EffectType.IMPACT_AREA);
+        if (hasEffects(effects)) {
+            lore.add(ChatColor.BOLD + "On Impact Area" + ChatColor.RESET);
+            addEffectLore(effects, lore);
+        }
+    }
+
+    protected void addCasterLore(List<String> lore) {
+        List<Effect> effects = filterEffects(EffectType.CASTER);
+        if (hasEffects(effects)) {
+            lore.add(ChatColor.BOLD + "On Caster" + ChatColor.RESET);
+            addEffectLore(effects, lore);
+        }
+    }
+
+    protected void addCasterAreaLore(List<String> lore) {
+        List<Effect> effects = filterEffects(EffectType.CASTER_AREA);
+        if (hasEffects(effects)) {
+            lore.add(ChatColor.BOLD + "On Caster Area" + ChatColor.RESET);
+            addEffectLore(effects, lore);
+        }
+    }
+
+    private List<Effect> filterEffects(EffectType type) {
+        return effects
+                .stream()
+                .filter(effect -> effect.getType().equals(type))
+                .collect(Collectors.toList());
+    }
+
+    private boolean hasEffects(List<Effect> effects) {
+        return effects.size() > 0;
+    }
+
+    private void addEffectLore(List<Effect> effects, List<String> lore) {
+        for (Effect effect : effects) {
+            lore.add(effect.getLore());
+        }
     }
 }

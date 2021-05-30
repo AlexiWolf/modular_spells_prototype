@@ -23,6 +23,7 @@ import com.alexiwolf.prototype.modularspells.core.spells.ManaConsumer;
 import com.alexiwolf.prototype.modularspells.core.spells.effects.ambient.AmbientEffect;
 import com.alexiwolf.prototype.modularspells.core.spells.RateLimited;
 import com.alexiwolf.prototype.modularspells.core.spells.Spell;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 
@@ -122,5 +123,9 @@ public class Effect implements RateLimited, ManaConsumer, AmbientEffect {
     @Override
     public int getManaCost() {
         return this.manaCost;
+    }
+
+    public String getLore() {
+        return ChatColor.RED + "Unknown Effects";
     }
 }
