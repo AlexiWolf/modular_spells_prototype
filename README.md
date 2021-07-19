@@ -8,5 +8,4 @@ proof-of-concept and a demo.  It includes only the base spell system, and a few 
 ## License
 
 Modular Spells (and by extension this prototype version) is licensed under the 
-[GNU General Public License version 3 or higher](https://www.gnu.org/licenses/gpl-3.0.txt).
-A copy of the license can also be found in this repository in [COPYING.txt](COPYING.txt).
+[GNU Affero General Public License version 3 or higher](COPYING.txt).
